@@ -1,5 +1,7 @@
 import { stringify } from 'qs';
-import request from '@/utils/request';
+import data from '../../mock';
+
+const request = (path, options = {}) => data[`${options.method || 'GET'} ${path}`];
 
 export async function queryProjectNotice() {
   return request('/api/project/notice');
