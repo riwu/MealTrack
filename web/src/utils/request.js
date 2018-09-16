@@ -2,7 +2,44 @@ import fetch from 'dva/fetch';
 import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
+import { parse } from 'qs';
 import { isAntdPro } from './utils';
+import data from '../../mock';
+
+const requestMock = (path, req = {}) => {
+  req.url = path;
+
+  const index = path.indexOf('?');
+  if (index > -1) {
+    req.query = parse(path.slice(index + 1));
+    path = path.slice(0, index);
+  }
+  const response = data[`${req.method || 'GET'} ${path}`];
+  if (typeof response !== 'function') {
+    return response;
+  }
+  let result;
+  const res = {
+    json(obj) {
+      result = obj;
+    },
+    send(obj) {
+      result = obj;
+    },
+    status(code) {
+      return {
+        send(obj) {
+          result = obj;
+          result.status = code;
+        },
+      };
+    },
+  };
+  response(req, res);
+  return result;
+};
+
+export default requestMock;
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -63,7 +100,7 @@ const cachedSave = (response, hashcode) => {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(
+function request(
   url,
   options = {
     expirys: isAntdPro(),
