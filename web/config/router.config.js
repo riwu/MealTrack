@@ -25,6 +25,11 @@ export default [
         icon: 'dashboard',
         routes: [
           {
+            path: '/dashboard/wastage',
+            name: 'wastage',
+            component: './Dashboard/Wastage',
+          },
+          {
             path: '/dashboard/analysis',
             name: 'analysis',
             component: './Dashboard/Analysis',

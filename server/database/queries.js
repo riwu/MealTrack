@@ -9,6 +9,10 @@ const conn = mysql.createPool({
 });
 
 module.exports = {
+  getConsumption: () => conn.query(
+    'SELECT number, timestamp, name, qty FROM flight JOIN consumption ON flight.id = consumption.flight_id',
+  ),
+
   addConsumption: async (flightNo, timestamp, items) => {
     const connection = await conn.getConnection();
     try {
