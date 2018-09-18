@@ -30,6 +30,11 @@ export default [
             component: './Dashboard/Wastage',
           },
           {
+            path: '/dashboard/upload',
+            name: 'upload',
+            component: './Dashboard/Upload',
+          },
+          {
             path: '/dashboard/analysis',
             name: 'analysis',
             component: './Dashboard/Analysis',

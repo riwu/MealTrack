@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import axios from 'axios';
 import {
   Row,
   Col,
@@ -23,11 +22,8 @@ import {
 } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-
+import { getConsumption } from '../../services/api';
 import styles from './Wastage.less';
-
-axios.defaults.baseURL =
-  process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : 'https://a.x0pa.com:4011/';
 
 const FormItem = Form.Item;
 const { Step } = Steps;
@@ -292,8 +288,8 @@ class TableList extends PureComponent {
     dispatch({
       type: 'rule/fetch',
     });
-    axios.get('consumption').then(response => {
-      const data = Object.entries(response.data).reduce((acc, [flightNo, timestamps]) => {
+    getConsumption().then(responseData => {
+      const data = Object.entries(responseData).reduce((acc, [flightNo, timestamps]) => {
         acc.push(
           ...Object.entries(timestamps).reduce((arr, [timestamp, items]) => {
             arr.push(
@@ -302,6 +298,7 @@ class TableList extends PureComponent {
                 timestamp,
                 flightNo,
                 upliftQty: Math.round((item.qty * (1 + Math.random())) / 10) * 10,
+                key: `${flightNo}-${timestamp}-${item.name}`,
               }))
             );
             return arr;
@@ -609,10 +606,9 @@ class TableList extends PureComponent {
                 },
                 {
                   title: 'Wastage (%)',
-                  dataIndex: 'qty',
                   defaultSortOrder: 'descend',
                   sorter: (a, b) => getWastage(a.qty, a.upliftQty) - getWastage(b.qty, b.upliftQty),
-                  render: (val, obj) => getWastage(val, obj.upliftQty),
+                  render: (val, obj) => getWastage(obj.qty, obj.upliftQty),
                 },
               ]}
             />
