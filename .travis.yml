@@ -6,7 +6,7 @@ cache:
     - web/node_modules
     - server/node_modules
 env:
-  - TEST_DIR=client
+  - TEST_DIR=web
   - TEST_DIR=server
 script:
   - cd $TEST_DIR && yarn && yarn test
