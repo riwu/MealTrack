@@ -37,7 +37,7 @@ const getValue = obj =>
 const statusMap = ['default', 'processing', 'success', 'error'];
 const status = ['关闭', '运行中', '已上线', '异常'];
 
-const getWastage = (qty, upliftQty) => Math.round((1 - qty / upliftQty) * 100);
+const getWastage = (qty, upliftQty) => Math.max(10, Math.round((1 - qty / upliftQty) * 100));
 
 const CreateForm = Form.create()(props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
