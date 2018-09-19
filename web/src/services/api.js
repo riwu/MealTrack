@@ -3,7 +3,7 @@ import request from '@/utils/request';
 import axios from 'axios';
 
 axios.defaults.baseURL =
-  process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : process.env.REACT_APP_API_URL;
+  process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : '/api/';
 
 export const getConsumption = () => axios.get('consumption').then(response => response.data);
 
