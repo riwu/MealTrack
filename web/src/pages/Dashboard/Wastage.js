@@ -297,7 +297,7 @@ class TableList extends PureComponent {
                 ...item,
                 timestamp,
                 flightNo,
-                upliftQty: Math.max(10, Math.round((item.qty * (1 + Math.random())) / 10) * 10),
+                upliftQty: Math.max(10, Math.ceil((item.qty * (1 + Math.random() / 3)) / 10) * 10),
                 key: `${flightNo}-${timestamp}-${item.name}`,
               }))
             );
