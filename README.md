@@ -1,10 +1,5 @@
 # Setup
 
-## Client
-
-- Set environment variable
-  - `REACT_APP_API_URL`: API base URL, eg. https://example.com/
-
 ## Server
 
 - Set environment variable
