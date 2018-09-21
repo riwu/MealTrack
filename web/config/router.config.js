@@ -35,6 +35,11 @@ export default [
             component: './Dashboard/Upload',
           },
           {
+            path: '/dashboard/visualise',
+            name: 'visualise',
+            component: './Dashboard/Visualise',
+          },
+          {
             path: '/dashboard/analysis',
             name: 'analysis',
             component: './Dashboard/Analysis',

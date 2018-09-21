@@ -4,6 +4,7 @@ export default {
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.wastage': 'Wastage',
   'menu.dashboard.upload': 'Upload',
+  'menu.dashboard.visualise': 'Visualise',
   'menu.dashboard.analysis': 'Analysis',
   'menu.dashboard.monitor': 'Monitor',
   'menu.dashboard.workplace': 'Workplace',

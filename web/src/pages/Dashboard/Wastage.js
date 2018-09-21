@@ -37,7 +37,9 @@ const getValue = obj =>
 const statusMap = ['default', 'processing', 'success', 'error'];
 const status = ['关闭', '运行中', '已上线', '异常'];
 
-const getWastage = (qty, upliftQty) => Math.round((1 - qty / upliftQty) * 100);
+export const getWastage = (qty, upliftQty) => Math.round((1 - qty / upliftQty) * 100);
+export const getUpliftQty = qty =>
+  Math.max(10, Math.ceil((qty * (1 + Math.random() / 3)) / 10) * 10);
 
 const CreateForm = Form.create()(props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
@@ -297,7 +299,7 @@ class TableList extends PureComponent {
                 ...item,
                 timestamp,
                 flightNo,
-                upliftQty: Math.max(10, Math.ceil((item.qty * (1 + Math.random() / 3)) / 10) * 10),
+                upliftQty: getUpliftQty(item.qty),
                 key: `${flightNo}-${timestamp}-${item.name}`,
               }))
             );
@@ -569,7 +571,7 @@ class TableList extends PureComponent {
       handleUpdate: this.handleUpdate,
     };
     return (
-      <PageHeaderWrapper title="Food wastage">
+      <PageHeaderWrapper title="Food Wastage">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderForm()}</div>

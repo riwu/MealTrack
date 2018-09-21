@@ -19,8 +19,8 @@ class BasicForms extends PureComponent {
   componentDidMount() {
     getConsumption().then(responseData => {
       const items = Object.values(responseData).reduce((acc, timestamps) => {
-        Object.values(timestamps).forEach(items => {
-          items.forEach(item => acc.add(item.name));
+        Object.values(timestamps).forEach(flightItems => {
+          flightItems.forEach(item => acc.add(item.name));
         });
         return acc;
       }, new Set());
@@ -66,7 +66,7 @@ class BasicForms extends PureComponent {
     };
 
     return (
-      <PageHeaderWrapper title="Upload" content="Upload food images for item recognition.">
+      <PageHeaderWrapper title="Upload food images for item recognition">
         <Card bordered={false}>
           <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
             <FormItem {...formItemLayout} label="Item name">
