@@ -44,8 +44,6 @@ export default {
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': defaultSettings.primaryColor,
-    'layout-header-background': '#00266b',
-    'menu-dark-submenu-bg': '#001d52',
   },
   externals: {
     '@antv/data-set': 'DataSet',
